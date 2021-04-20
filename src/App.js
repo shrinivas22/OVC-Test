@@ -1,20 +1,29 @@
 import React, { Component } from 'react'
 import './App.css';
-import { Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
+import Card from 'react-bootstrap/Card'
+import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { createBrowserHistory } from "history";
-import TableContainer from './Containers/usercontainers';
+import TableContainer from './Components/TableComponent';
+import PostComponent from './Components/PostsComponent';
 
-const history = createBrowserHistory();
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Router history={history}>
-          <Route exact path={"/"} component={TableContainer} />
-          <Route exact path={"/home"} component={TableContainer} />
-        </Router>
+        <Card className="text-center">
+          <Card.Header>OVC React-Redux</Card.Header>
+          <Card.Body>
+          <Router>
+          <Switch>
+            <Route exact path={"/"} component={TableContainer} />
+            <Route exact path={"/posts/:name/:userID"} component={PostComponent} />
+          </Switch>
+          </Router>
+          </Card.Body>
+          <Card.Footer className="blockquote-footer">Created with Love</Card.Footer>
+        </Card>
       </div>
     );
   }

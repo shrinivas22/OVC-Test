@@ -1,41 +1,64 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
+import { getUsers } from "../redux/Actions/UserAction"
+import { connect } from "react-redux";
+import SearchContainer from "./SearchComponent.js";
 
-export default class TableComponent extends Component {
+
+class TableComponent extends Component {
 
     componentDidMount() {
         this.props.getUsers();
-        console.log(this.props.users);
     }
 
     render() {
         return (
-            <div className="container-fluid">
-                <Table striped bordered hover>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>City</th>
-                        <th>Company</th>
-                    </tr>
-                    </thead>
+            <>
+                <SearchContainer></SearchContainer>
+                <div className="container-fluid">
 
-                    <tbody>
-                    {
-                        this.props.users.map(user =>
-                            <tr id="user-row" key={ user.id }>
-                                <td>{ user.name }</td>
-                                <td>{ user.email }</td>
-                                <td>{ user.address.city }</td>
-                                <td>{ user.company.name }</td>
+                    <Table striped bordered hover variant="dark">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>Company</th>
                             </tr>
-                        )
-                    }
-                    </tbody>
-                </Table>
-            </div>
+                        </thead>
+
+                        <tbody>
+                            {
+                                this.props.filteredUsers.map(({ id, name, email, address, company }) =>
+                                    <tr id="user-row" key={id}>
+                                        <td><Link to={`/posts/${name}/${id}`}>{name}</Link></td>
+                                        <td>{email}</td>
+                                        <td>{address.city}</td>
+                                        <td>{company.name}</td>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
+                    </Table>
+                </div>
+            </>
         )
     }
 }
+
+
+const stateToPropertyMapper = state => ({
+    users: state.MainReducer.users,
+    filteredUsers: state.MainReducer.filtered_users,
+});
+
+const dispatcherToPropsMapper = dispatch => ({
+    getUsers: () => getUsers(dispatch),
+    //getUserPosts: (userId, user_name) => getUserPosts(dispatch, userId, user_name),
+
+});
+
+const TableContainer = connect(stateToPropertyMapper, dispatcherToPropsMapper)(TableComponent);
+
+export default TableContainer;
