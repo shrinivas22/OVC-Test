@@ -1,5 +1,4 @@
 import * as ActionTypes from '../ActionTypes/Types';
-//import { push } from 'react-router-redux'
 
 
 const baseAPIURL = "https://jsonplaceholder.typicode.com";
@@ -13,12 +12,10 @@ export const getUsers = async dispatch => {
                 type: ActionTypes.GET_ALL_USERS,
                 payload: data,
             })
-            console.log(data);
         })
         .catch((error) => {
             dispatch({
                 type: 'GET_ALL_USERS_ERROR',
-                message: "Couldn't get all users. Please try again!",
                 payload: [],
             })
             console.log('Looks like there was a problem: \n', error);
@@ -51,12 +48,10 @@ export const getUserPosts = async (dispatch, userId) => {
                 payload: data,
                 success: true,
             })
-            console.log(data);
         })
         .catch((error) => {
             dispatch({
                 type: 'GET_USERS_POSTS_ERROR',
-                message: "Couldn't get all users posts. Please try again!",
                 payload: [],
                 success: false,
             })

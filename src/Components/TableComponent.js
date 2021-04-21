@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import Table from 'react-bootstrap/Table'
 import { getUsers } from "../redux/Actions/UserAction"
 import { connect } from "react-redux";
 import SearchContainer from "./SearchComponent.js";
+import {Table} from 'react-bootstrap';
 
-
-class TableComponent extends Component {
+export class TableComponent extends Component {
 
     componentDidMount() {
         this.props.getUsers();
@@ -15,10 +14,11 @@ class TableComponent extends Component {
     render() {
         return (
             <>
+                <br></br>
                 <SearchContainer></SearchContainer>
                 <div className="container-fluid">
 
-                    <Table striped bordered hover variant="dark">
+                    <Table striped bordered hover variant>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -30,7 +30,7 @@ class TableComponent extends Component {
 
                         <tbody>
                             {
-                                this.props.filteredUsers.map(({ id, name, email, address, company }) =>
+                                this.props.filtered_users.map(({ id, name, email, address, company }) =>
                                     <tr id="user-row" key={id}>
                                         <td><Link to={`/posts/${name}/${id}`}>{name}</Link></td>
                                         <td>{email}</td>
@@ -50,13 +50,11 @@ class TableComponent extends Component {
 
 const stateToPropertyMapper = state => ({
     users: state.MainReducer.users,
-    filteredUsers: state.MainReducer.filtered_users,
+    filtered_users: state.MainReducer.filtered_users,
 });
 
 const dispatcherToPropsMapper = dispatch => ({
     getUsers: () => getUsers(dispatch),
-    //getUserPosts: (userId, user_name) => getUserPosts(dispatch, userId, user_name),
-
 });
 
 const TableContainer = connect(stateToPropertyMapper, dispatcherToPropsMapper)(TableComponent);

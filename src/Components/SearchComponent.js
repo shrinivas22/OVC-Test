@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { getFilteredUsers } from "../redux/Actions/UserAction";
 import {InputGroup, FormControl} from 'react-bootstrap'
-class SearchBarComponent extends Component {
+export class SearchBarComponent extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -11,16 +11,16 @@ class SearchBarComponent extends Component {
     handleChange(e) {
         const searched_word = e.target.value;
         //if (e.target.value !== "") {
-        console.log(searched_word, this.props.usersList);
-        this.props.getFilteredUsers(searched_word, this.props.usersList);
+        this.props.getFilteredUsers(searched_word, this.props.users);
         //}
     }
     render() {
         return (
-            <div >
-                <InputGroup size="mb-3" style={{'marginLeft':'40%'}}>
+            <div style={{position:'relative'}}>
+                <InputGroup size="mb-3">
             <FormControl aria-label="Default"
-                onChange={this.handleChange}
+                test-attr = "userSearch"
+                onChange = {this.handleChange}
                 placeholder="Search..."
                 aria-describedby="inputGroup-sizing-default" />
         </InputGroup>
@@ -35,8 +35,8 @@ class SearchBarComponent extends Component {
 }
 
 const stateToPropertyMapper = state => ({
-    usersList: state.MainReducer.users,
-    filterdUsers: state.MainReducer.filtered_users
+    users: state.MainReducer.users,
+    filtered_users: state.MainReducer.filtered_users
 });
 
 const dispatcherToPropsMapper = dispatch => ({

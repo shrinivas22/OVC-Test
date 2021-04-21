@@ -1,29 +1,37 @@
 import React, { Component } from 'react'
-import './App.css';
-import { BrowserRouter as Router} from 'react-router-dom';
-import Card from 'react-bootstrap/Card'
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import TableContainer from './Components/TableComponent';
 import PostComponent from './Components/PostsComponent';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <Card className="text-center">
-          <Card.Header>OVC React-Redux</Card.Header>
-          <Card.Body>
-          <Router>
-          <Switch>
-            <Route exact path={"/"} component={TableContainer} />
-            <Route exact path={"/posts/:name/:userID"} component={PostComponent} />
-          </Switch>
-          </Router>
-          </Card.Body>
-          <Card.Footer className="blockquote-footer">Created with Love</Card.Footer>
-        </Card>
+      <div test-attr="appComponent">
+        <header>
+          <nav className='footer mt-auto py-3 bg-dark text-white'>
+            <div className='container' style={{textAlign:'center'}}>JSON API PLACE HOLDER APP - OVC</div>
+          </nav>
+        </header>
+        <main role='main' className='flex-shrink-0'>
+          <div className='container'>
+            <Router>
+              <Switch>
+                <Route exact path={"/"} component={TableContainer} />
+                <Route exact path={"/posts/:name/:userID"} component={PostComponent} />
+              </Switch>
+            </Router>
+            
+          </div>
+        </main>
+        <div>
+          <footer className='footer mt-auto py-3 bg-dark text-white'>
+            <div className='container' style={{textAlign:'center'}}>Developed with React-Redux v16.0+ </div>
+          </footer>
+        </div>
+
       </div>
     );
   }

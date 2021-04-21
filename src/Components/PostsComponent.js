@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table'
 import { connect } from "react-redux";
 import { getUserPosts } from "../redux/Actions/UserAction"
-class PostsComponent extends Component {
+export class PostsComponent extends Component {
 
     constructor(props){
         super(props);
@@ -12,17 +12,7 @@ class PostsComponent extends Component {
         
 
     }
-    componentDidMount() {
-        console.log(this.props.match.params);
-        const name = this.props.match.params.name;
-        const id = this.props.match.params.userID;
-
-        //this.props.getUserPosts(id, name);
-
-        console.log(this.props.posts);
-        console.log(this.props.history);
-        console.log(this.props.match.params.usedID);
-    }
+  
 
     render() {
         return (
@@ -54,7 +44,7 @@ class PostsComponent extends Component {
 
 const mapStateToProps = state => ({
     posts: state.MainReducer.posts,
-    dataRecieved: state.MainReducer.data_recieved,
+    data_recieved: state.MainReducer.data_recieved,
 });
 
 const dispatcherToPropsMapper = dispatch => ({
