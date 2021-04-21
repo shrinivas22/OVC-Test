@@ -6,7 +6,7 @@ export class PostsComponent extends Component {
 
     constructor(props){
         super(props);
-        const name = this.props.match.params.name;
+        //const name = this.props.match.params.name;
         const id = this.props.match.params.userID;
         this.props.getUserPosts(id);
         

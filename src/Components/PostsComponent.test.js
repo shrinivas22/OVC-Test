@@ -11,14 +11,14 @@ const mockDataUserPosts = [
     {
         userId: 1,
         id: 1,
-        title: "Title 1",
-        body: "Body 1"
+        title: "hjkdfhkjfhkhs",
+        body: "jdfkjfkjfhkfsh"
     },
     {
         userId: 1,
         id: 2,
-        title: "Title 2",
-        body: "Body 2"
+        title: "fdjkhkjfshkjdfsh",
+        body: "fldjhkjhfkjhdfskj"
     }
 ];
 
@@ -33,8 +33,9 @@ describe('Renders in SearchBar', () => {
         };
     });
 
-    it('Should check if the userPosts list is obtainded by the postscomponent ', () => {
+    it('Should check if the userPosts list is obtainded by the postsComponent ', () => {
         props.getUserPosts = jest.fn();
+        // handling params to obtain the link url params as props to this component
         const wrapper = shallow(<PostsComponent
             {...props}
             match={{ params: { userId: 1, name: 'xyz' }, isExact: true, path: "", url: "" }}

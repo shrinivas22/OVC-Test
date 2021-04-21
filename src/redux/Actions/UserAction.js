@@ -34,6 +34,7 @@ export const getUserPosts = async (dispatch, userId) => {
 
 
     let url = baseAPIURL + '/posts?' + query;
+
     dispatch({
         type: ActionTypes.GET_USER_POSTS,
         payload: [],
@@ -46,6 +47,7 @@ export const getUserPosts = async (dispatch, userId) => {
             dispatch({
                 type: ActionTypes.GET_USER_POSTS,
                 payload: data,
+                //just a variable to add a loader in future for larger data
                 success: true,
             })
         })

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { TableComponent } from './TableComponent';
-import { MemoryRouter, Link, Route } from 'react-router-dom';
+//import { MemoryRouter, Link, Route } from 'react-router-dom';
 import * as enzymeConfigure from '../configureTests';
 
 // Configuring Enzyme Adapter 
@@ -53,6 +53,7 @@ describe('Renders in TableComponent', () => {
         props.getUsers = jest.fn();
         const wrapper = shallow(<TableComponent {...props} />);
         const instance = wrapper.instance();
+        
         // place where getUsers is invoked
         instance.componentDidMount();
         const callback = props.getUsers.mock.calls.length;
